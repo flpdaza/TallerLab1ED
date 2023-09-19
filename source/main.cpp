@@ -1,20 +1,22 @@
 #include <iostream>
 #include "Usuario.h"
+#include "Admin.h"
 
 using namespace std;
 
 int main(){
 
-    Usuario* user1 = new Usuario();
-    string nombre;
-    cout<<"ingrese nombre usuario: ";
-    cin>>nombre;
-    cout<<""<<endl;
-    user1 -> setNombre(nombre);
+    /*Admin* user1 = new Admin("Felipe", "djadjsa", 25, "correo@correo.cl", true);
 
     string nombreUsuario = user1->getNombre();
-
-    cout<<nombreUsuario<<endl;
+    int edad = user1->getEdad();
+    
+    if(user1->getLog()){
+        cout<<"El usuario es admin"<<endl;
+    }else{
+        cout<<"El usuario no es admin"<<endl;
+    }
+    cout<<nombreUsuario<<" "<<edad<<endl;*/
 
     return 0;
 }

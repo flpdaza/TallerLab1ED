@@ -5,21 +5,32 @@ using namespace std;
 
 class Usuario{
     private:
-    string nombre;
-    string contrasena;
-    int edad;
+        string nombre;
+        string contrasena;
+        int edad;
     public:
-    Usuario();
-    void setNombre(string);
-    string getNombre();
+        Usuario(string, string, int);
+        ~Usuario();
+        void setNombre(string);
+        string getNombre();
+        int getEdad();
+};
+Usuario::Usuario(string nombre, string contrasena, int edad){
+    this -> nombre = nombre;
+    this -> contrasena = contrasena;
+    this -> edad = edad;
 };
 
-Usuario::Usuario(){};
+Usuario::~Usuario(){};
 
 void Usuario::setNombre(string nombre){
     this -> nombre = nombre;
 };
 
 string Usuario::getNombre(){
-    return this -> nombre;
+    return nombre;
 };
+
+int Usuario::getEdad(){
+    return edad;
+}
