@@ -5,32 +5,59 @@ using namespace std;
 
 class Usuario{
     private:
-        string nombre;
+        string user;
         string contrasena;
         int edad;
+        string correo;
+        bool log;
     public:
         Usuario(string, string, int);
         ~Usuario();
-        void setNombre(string);
-        string getNombre();
+        void setUser(string);
+        void setEdad(int);
+        virtual void setCorreo(string);
+        string getUser();
+        string getContrasena();        
         int getEdad();
+        virtual string getCorreo();
+        virtual bool getLog();
 };
-Usuario::Usuario(string nombre, string contrasena, int edad){
-    this -> nombre = nombre;
+Usuario::Usuario(string user, string contrasena, int edad){
+    this -> user = user;
     this -> contrasena = contrasena;
     this -> edad = edad;
 };
 
 Usuario::~Usuario(){};
 
-void Usuario::setNombre(string nombre){
-    this -> nombre = nombre;
+void Usuario::setUser(string user){
+    this -> user = user;
 };
 
-string Usuario::getNombre(){
-    return nombre;
+void Usuario::setEdad(int edad){
+    this -> edad = edad;
+};
+
+void Usuario::setCorreo(string correo){
+    this -> correo = correo;
+};
+
+string Usuario::getUser(){
+    return this -> user;
+};
+
+string Usuario::getContrasena(){
+    return this -> contrasena;
 };
 
 int Usuario::getEdad(){
-    return edad;
-}
+    return this -> edad;
+};
+
+string Usuario::getCorreo(){
+    return this -> correo;
+};
+
+bool Usuario::getLog(){
+    return this -> log;
+};

@@ -9,8 +9,9 @@ class UsuarioNormal : public Usuario{
     public:
         UsuarioNormal(string, string, int, string);
         ~UsuarioNormal();
-        void setCorreo(string);
         string getCorreo();
+        void setCorreo(string);
+        bool getLog();
 };
 
 UsuarioNormal::UsuarioNormal(string nombre, string contrasena, int edad, string correo):Usuario(nombre, contrasena, edad){
@@ -25,4 +26,8 @@ void UsuarioNormal::setCorreo(string correo){
 
 string UsuarioNormal::getCorreo(){
     return this->correo;
+};
+
+bool UsuarioNormal::getLog(){
+    return true;
 };
