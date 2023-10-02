@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Usuario.h"
 
@@ -11,7 +12,6 @@ class UsuarioNormal : public Usuario{
         ~UsuarioNormal();
         string getCorreo();
         void setCorreo(string);
-        bool getLog();
 };
 
 UsuarioNormal::UsuarioNormal(string nombre, string contrasena, int edad, string correo):Usuario(nombre, contrasena, edad){
@@ -26,8 +26,4 @@ void UsuarioNormal::setCorreo(string correo){
 
 string UsuarioNormal::getCorreo(){
     return this->correo;
-};
-
-bool UsuarioNormal::getLog(){
-    return true;
 };

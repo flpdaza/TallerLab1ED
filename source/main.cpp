@@ -1,7 +1,8 @@
 #include <iostream>
-#include "Usuario.h"
-#include "Admin.h"
-#include "UsuarioNormal.h"
+#include "Usuario/Usuario.h"
+#include "Usuario/Admin.h"
+#include "Usuario/UsuarioNormal.h"
+#include "Usuario/Nino.h"
 
 using namespace std;
 
@@ -26,13 +27,24 @@ int main(){
         cout<<"El usuario no es admin"<<endl;
     }*/
     
-    Usuario* user1 = new UsuarioNormal("Felipe", "djadjsa", 25, "correo@correo.cl");
+    /*Usuario* user1 = new UsuarioNormal("Felipe", "djadjsa", 25, "correo@correo.cl");
 
     if(user1->getLog()){
         cout<<"Este usuario es admin"<<endl;
     }else{
         cout<<"Este usuario NO es admin"<<endl;
+    }*/
+
+    Usuario* kid = new Nino("Felipe", "djadjsa", 12);
+
+    if(kid->getLog()){
+        cout<<"Este usuario es admin"<<endl;
     }
-
-
+    else
+    {
+        if(kid->getEdad()<18)
+        {
+            cout<<"Este usuario es menor de edad"<<endl;
+        }
+    }
 }
