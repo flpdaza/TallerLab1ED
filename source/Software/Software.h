@@ -9,7 +9,7 @@ class Software{
     Lista listaUsuarios;
     double precio;
     public:
-    Software(string, string, string, Lista, double);
+    Software(string, string, string, double);
     ~Software();
     string getNombre();
     string getDeveloper();
@@ -22,11 +22,11 @@ class Software{
     void setPrecio(double);
 };
 
-Software::Software(string nombre, string developer, string calificacion, Lista listaUsuarios, double precio){
+Software::Software(string nombre, string developer, string calificacion, double precio){
     this -> nombre = nombre;
     this -> developer = developer;
     this -> clasificacion = clasificacion;
-    this -> listaUsuarios = listaUsuarios;
+    this -> listaUsuarios = new Lista();
     this -> precio = precio;
 
 };
