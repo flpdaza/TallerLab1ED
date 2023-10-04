@@ -14,7 +14,7 @@ class Admin : public Usuario{
         bool getLog();
 };
 
-Admin::Admin(string nombre, string contrasena, int edad, string correo, bool log):Usuario(nombre, contrasena, edad){
+Admin::Admin(string user, string contrasena, int edad, string correo, bool log):Usuario(user, contrasena, edad){
     this -> correo = correo;
     this -> log = log;
 };

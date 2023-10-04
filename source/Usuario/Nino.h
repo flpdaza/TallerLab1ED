@@ -11,5 +11,4 @@ class Nino:public Usuario{
 };
 
 Nino::Nino(string user, string contrasena, int edad):Usuario(user, contrasena, edad){
-    
 };

@@ -3,6 +3,8 @@
 #include "Usuario/Admin.h"
 #include "Usuario/UsuarioNormal.h"
 #include "Usuario/Nino.h"
+#include "NodoUsuario.h"
+
 
 using namespace std;
 
@@ -35,7 +37,7 @@ int main(){
         cout<<"Este usuario NO es admin"<<endl;
     }*/
 
-    Usuario* kid = new Nino("Felipe", "djadjsa", 12);
+    /*Usuario* kid = new Nino("Felipe", "djadjsa", 12);
 
     if(kid->getLog()){
         cout<<"Este usuario es admin"<<endl;
@@ -46,5 +48,29 @@ int main(){
         {
             cout<<"Este usuario es menor de edad"<<endl;
         }
+    }*/
+
+    NodoUsuario* raiz = new NodoUsuario();
+    
+    Usuario *admin1 = new Admin("Felipe", "djadjsa", 25, "correo@correo.cl", true);
+    Usuario *admin2 = new Admin("Juan", "djadjsa", 25, "correo@correo.cl", true);
+    Usuario *nino = new Nino("Jose", "dsdsds", 12);
+
+    raiz -> insertarUsuario(raiz, admin1);
+    raiz -> insertarUsuario(raiz, nino);
+
+    Usuario *user = raiz -> getUsuarioNombre(raiz, "Jaime");
+
+
+
+
+    if(user != NULL && user->getCorreo() != ""){
+        cout<<"se encontro el usuario "<< user->getUser()<<" y su correo es "<< user->getCorreo()<<endl;
+    }else if(user != NULL && user->getCorreo() == ""){
+        cout<<"se encontro el usuario "<< user->getUser()<<" es un nino"<<endl;
+    }else{
+        cout<<"No se encontro el usuario"<<endl;
     }
+
+
 }
