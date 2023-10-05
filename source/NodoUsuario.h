@@ -10,18 +10,20 @@ class NodoUsuario{
     NodoUsuario *next;
     NodoUsuario *prev;
     public:
-    void insertarUsuario(NodoUsuario *&, Usuario*);
+    void insertarUsuario(NodoUsuario *, Usuario*);
     Usuario* getUsuario(NodoUsuario *&);
     Usuario *getUsuarioNombre(NodoUsuario *&, string);
 };
 
-void NodoUsuario::insertarUsuario(NodoUsuario *& raiz, Usuario* u){
+void NodoUsuario::insertarUsuario(NodoUsuario *raiz, Usuario* u){
     if(raiz->usuario == NULL){
         raiz->usuario = u;
+        cout<<"usuario ingresado en la primera posicion"<<endl;
         return;
     }
     NodoUsuario *nuevoNodo = new NodoUsuario();
     nuevoNodo -> usuario = u;
+    cout<<"Nodo agregado"<<endl;
     while(raiz -> next != NULL){
         raiz = raiz -> next;
     }

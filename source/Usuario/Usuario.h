@@ -9,7 +9,7 @@ class Usuario{
         string contrasena;
         int edad;
         string correo;
-        bool log;
+        bool log = false;
     public:
         Usuario(string, string, int);
         ~Usuario();
