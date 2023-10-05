@@ -3,21 +3,31 @@
 #include "Usuario/Admin.h"
 #include "Usuario/UsuarioNormal.h"
 #include "Usuario/Nino.h"
+#include "Software/Software.h"
+#include "Software/Juego.h"
+#include "Software/Navegador.h"
+#include "Software/Ofimatica.h"
+#include "Software/Produccion.h"
+#include "Software/Seguridad.h"
+#include "Software/Social.h"
 #include "NodoUsuario.h"
-
+#include "NodoSoftware.h"
 
 using namespace std;
 
 void poblarUsuarios(NodoUsuario *);
+void poblarJuegos(NodoSoftware *);
 
 int main(){
 
     NodoUsuario* raiz = new NodoUsuario();
-    
+    NodoSoftware* incial = new NodoSoftware();
+
+    poblarJuegos(incial);
     poblarUsuarios(raiz);
 
 
-    Usuario *user = raiz -> getUsuarioNombre(raiz, "Felipe");
+    //Usuario *user = raiz -> getUsuarioNombre(raiz, "Felipe");
     
 
 }
@@ -54,4 +64,12 @@ void poblarUsuarios(NodoUsuario *raiz){
     raiz->insertarUsuario(raiz, usuario8);
     raiz->insertarUsuario(raiz, usuario9);
     raiz->insertarUsuario(raiz, usuario10);
+};
+
+void poblarJuegos(NodoSoftware *inicial){
+    Software *juego1 = new Juego("COD", "JUAN", "JUEGO", 22000, "SHOOTER");
+    cout<<"AGREGANDO JUEGO"<<endl;
+
+    cout<<static_cast<Juego*>(juego1) -> getClasificacion()<<endl;
+
 };

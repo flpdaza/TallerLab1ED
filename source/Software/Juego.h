@@ -17,3 +17,13 @@ class Juego:public Software{
 Juego::Juego(string nombre, string developer, string clasificacion,double precio, string genero):Software(nombre, developer, clasificacion, precio){
     this -> genero = genero;
 };
+
+Juego::~Juego(){};
+
+string Juego::getGenero(){
+    return this -> genero;
+}
+
+void Juego::setGenero(string genero){
+    this -> genero = genero;
+}

@@ -1,20 +1,21 @@
 #pragma once
 #include <iostream>
-
+#include "../Usuario/Usuario.h"
+#include "../NodoUsuario.h"
 using namespace std;
 
 class Software{
     private:
     string nombre, developer, clasificacion;
-    Lista listaUsuarios;
     double precio;
+    NodoUsuario *listaUsuarios;
     public:
     Software(string, string, string, double);
     ~Software();
-    string getNombre();
-    string getDeveloper();
-    string getClasificacion();
-    Lista getLista();
+    NodoUsuario *getListaUsuarios();
+    virtual string getNombre();
+    virtual string getDeveloper();
+    virtual string getClasificacion();
     double getPrecio();
     void setNombre(string);
     void setDeveloper(string);
@@ -22,14 +23,15 @@ class Software{
     void setPrecio(double);
 };
 
-Software::Software(string nombre, string developer, string calificacion, double precio){
+Software::Software(string nombre, string developer, string clasificacion, double precio){
     this -> nombre = nombre;
     this -> developer = developer;
     this -> clasificacion = clasificacion;
-    this -> listaUsuarios = new Lista();
     this -> precio = precio;
 
 };
+
+Software::~Software(){};
 
 void Software::setNombre(string nombre){
     this -> nombre = nombre;
@@ -59,7 +61,7 @@ string Software::getClasificacion(){
     return this -> clasificacion;
 }
 
-Lista Software::getLista(){
+NodoUsuario* Software::getListaUsuarios(){
     return this -> listaUsuarios;
 }
 
