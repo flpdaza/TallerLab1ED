@@ -9,6 +9,7 @@ class Software{
     string nombre, developer, clasificacion;
     double precio;
     NodoUsuario *listaUsuarios;
+    
     public:
     Software(string, string, string, double);
     ~Software();

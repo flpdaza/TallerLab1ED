@@ -28,21 +28,25 @@ void NodoSoftware::insertarSoftware(NodoSoftware *raiz, Software *s){
     raiz -> next = nuevoNodo;
 }
 
-Software* NodoSoftware::getSoftwareClasificacion(NodoSoftware *& raiz, string clasificacion){
+Software* NodoSoftware::getSoftwareClasificacion(NodoSoftware *& raiz, string nombre){
     if(raiz -> software == NULL){
+        cout<<"NULL"<<endl;
         return NULL;
+
     }
 
-    if(raiz -> software -> getClasificacion() == clasificacion){
+    if(raiz -> software -> getNombre() == nombre){
+        cout<<"if"<<endl;
         return raiz -> software;
     }
 
-    while(raiz -> next != NULL && raiz -> software -> getClasificacion() != clasificacion){
+    while(raiz -> next != NULL && raiz -> software -> getNombre() != nombre){
+        cout<<"while"<<endl;
         raiz = raiz -> next;
-        if(raiz -> software -> getClasificacion() == clasificacion){
+        if(raiz -> software -> getNombre() == nombre){
             return raiz -> software;
         }
     }
-
+    cout<<"no se encontro"<<endl;
     return NULL;
 }

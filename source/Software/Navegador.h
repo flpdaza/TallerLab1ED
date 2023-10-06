@@ -17,6 +17,8 @@ class Navegador:public Software{
 
 Navegador::Navegador(string nombre, string developer, string clasificacion, double precio):Software(nombre, developer, clasificacion, precio){};
 
+Navegador::~Navegador(){};
+
 vector<string> Navegador::getHistorial(){
     return this -> historial;
 };
