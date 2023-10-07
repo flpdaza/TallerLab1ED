@@ -1,26 +1,26 @@
 #pragma once
 #include <iostream>
-#include "Usuario/Usuario.h"
+#include "../Usuario/Usuario.h"
 
 using namespace std;
 
-class NodoUsuario{
+class NodoAmigos{
     private:
     Usuario* usuario;
-    NodoUsuario *next;
+    NodoAmigos *next;
     public:
-    void insertarUsuario(NodoUsuario *, Usuario*);
-    Usuario* getUsuario(NodoUsuario *&);
-    Usuario *getUsuarioNombre(NodoUsuario *&, string);
-    void recorrerNodo(NodoUsuario *);
+    void insertarUsuario(NodoAmigos *, Usuario*);
+    Usuario* getUsuario(NodoAmigos *&);
+    Usuario *getUsuarioNombre(NodoAmigos *&, string);
 };
 
-void NodoUsuario::insertarUsuario(NodoUsuario *raiz, Usuario* u){
+void NodoAmigos::insertarUsuario(NodoAmigos *raiz, Usuario* u){
     if(raiz->usuario == NULL){
+        cout<<"NULL"<<endl;
         raiz->usuario = u;
         return;
     }
-    NodoUsuario *nuevoNodo = new NodoUsuario();
+    NodoAmigos *nuevoNodo = new NodoAmigos();
     nuevoNodo -> usuario = u;
     while(raiz -> next != NULL){
         raiz = raiz -> next;
@@ -30,11 +30,11 @@ void NodoUsuario::insertarUsuario(NodoUsuario *raiz, Usuario* u){
 
 };
 
-Usuario* NodoUsuario::getUsuario(NodoUsuario *& raiz){
+Usuario* NodoAmigos::getUsuario(NodoAmigos *& raiz){
     return raiz -> usuario;
 }
 
-Usuario* NodoUsuario::getUsuarioNombre(NodoUsuario *&raiz, string nombre){
+Usuario* NodoAmigos::getUsuarioNombre(NodoAmigos *&raiz, string nombre){
    
     if (raiz -> usuario == NULL){
         return NULL;
@@ -55,12 +55,5 @@ Usuario* NodoUsuario::getUsuarioNombre(NodoUsuario *&raiz, string nombre){
     return NULL;
 
 
-
-}
-
-void NodoUsuario::recorrerNodo(NodoUsuario *raiz){
-    for(NodoUsuario *p=raiz;p!=nullptr;p = p->next){
-        cout<<p->usuario->getUser()<<endl;    
-    }
 
 }

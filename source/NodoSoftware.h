@@ -30,18 +30,15 @@ void NodoSoftware::insertarSoftware(NodoSoftware *raiz, Software *s){
 
 Software* NodoSoftware::getSoftwareClasificacion(NodoSoftware *& raiz, string nombre){
     if(raiz -> software == NULL){
-        cout<<"NULL"<<endl;
         return NULL;
 
     }
 
     if(raiz -> software -> getNombre() == nombre){
-        cout<<"if"<<endl;
         return raiz -> software;
     }
 
     while(raiz -> next != NULL && raiz -> software -> getNombre() != nombre){
-        cout<<"while"<<endl;
         raiz = raiz -> next;
         if(raiz -> software -> getNombre() == nombre){
             return raiz -> software;

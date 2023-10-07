@@ -18,6 +18,8 @@ Seguridad::Seguridad(string nombre, string developer, string clasificacion, doub
     this -> tipoMalware = tipoMalware;
 };
 
+Seguridad::~Seguridad(){};
+
 string Seguridad::getTipoMalware(){
     return this -> tipoMalware;
 };

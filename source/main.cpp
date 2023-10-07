@@ -32,12 +32,17 @@ int main(){
     poblarSoftware(inicial);
     poblarUsuarios(raiz);
 
+    raiz->recorrerNodo(raiz);
+  
+    /*Usuario *user = raiz -> getUsuarioNombre(raiz, "Felipe");
+    Software *soft = inicial -> getSoftwareClasificacion(inicial, "FACEBOOK");
 
-    Usuario *user = raiz -> getUsuarioNombre(raiz, "Felipe");
-    Software *soft = inicial -> getSoftwareClasificacion(inicial, "FARM SIMULATOR");
-
-    cout<<soft -> getNombre()<<endl;
-
+    if(soft->getClasificacion() == "SOCIAL"){
+        static_cast <Social*>(soft) -> setListaAmigos(user);
+        Usuario *user2 = static_cast <Social*>(soft) -> getAmigoNombre(user->getUser());
+        cout<<user2->getUser()<<endl;
+    }*/
+  
 }
 
 void poblarUsuarios(NodoUsuario *raiz){
@@ -127,3 +132,58 @@ void poblarJuegos(NodoSoftware *inicial){
     inicial->insertarSoftware(inicial, juego20);
 };
 
+void poblarProduccion(NodoSoftware *inicial){
+    Software *produccion1 = new Produccion("OBS", "JORGE", "PRODUCCION", 22552.44, "STREAMING");
+    Software *produccion2 = new Produccion("GALERIA", "MIGUEL", "PRODUCCION", 22112.44, "FOTOS");
+    Software *produccion3 = new Produccion("CINE", "MATIAS", "PRODUCCION", 22232.44, "VIDEO");
+    Software *produccion4 = new Produccion("REPRODUCTOR", "PEDRO", "PRODUCCION", 222, "MUSICA");
+
+    inicial->insertarSoftware(inicial, produccion1);
+    inicial->insertarSoftware(inicial, produccion2);
+    inicial->insertarSoftware(inicial, produccion3);
+    inicial->insertarSoftware(inicial, produccion4);
+}
+
+void poblarNavegadores(NodoSoftware *inicial){
+    Software *navegador1 = new Navegador("CHROME", "FELIPE", "NAVEGADOR", 232323);
+    Software *navegador2 = new Navegador("MOZILLA", "MATIAS", "NAVEGADOR", 4323);
+
+    inicial->insertarSoftware(inicial, navegador1);
+    inicial->insertarSoftware(inicial, navegador2);
+}
+
+void poblarOfimatica(NodoSoftware *inicial){
+    Software *ofimatica1 = new Ofimatica("WORD", "AARON", "OFIMATICA", 44444);
+    Software *ofimatica2 = new Ofimatica("PPT", "PAULA", "OFIMATICA", 88888);
+    Software *ofimatica3 = new Ofimatica("EXCEL", "MARIA", "OFIMATICA", 777);
+    Software *ofimatica4 = new Ofimatica("ONENOTE", "CARLOS", "OFIMATICA", 4545);
+
+    inicial -> insertarSoftware (inicial, ofimatica1);
+    inicial -> insertarSoftware (inicial, ofimatica2);
+    inicial -> insertarSoftware (inicial, ofimatica3);
+    inicial -> insertarSoftware (inicial, ofimatica4);
+}
+
+void poblarSeguridad(NodoSoftware *inicial){
+    Software *seguridad1 = new Seguridad("SECURE", "JOSE", "SEGURIDAD", 323232, "RANSOMWARE");
+    Software *seguridad2 = new Seguridad("SEGURIDAD", "JOSE", "SEGURIDAD", 323232, "SPYWARE");
+    Software *seguridad3 = new Seguridad("ANTIVIRUS", "JOSE", "SEGURIDAD", 323232, "BOTNETS");
+    Software *seguridad4 = new Seguridad("CELULA", "JOSE", "SEGURIDAD", 323232, "ROOTKITS");
+    Software *seguridad5 = new Seguridad("SALVATION", "JOSE", "SEGURIDAD", 323232, "GUSANOS");
+    Software *seguridad6 = new Seguridad("SECURITY", "JOSE", "SEGURIDAD", 323232, "TROYANOS");
+
+    inicial->insertarSoftware(inicial, seguridad1);
+    inicial->insertarSoftware(inicial, seguridad2);
+    inicial->insertarSoftware(inicial, seguridad3);
+    inicial->insertarSoftware(inicial, seguridad4);
+    inicial->insertarSoftware(inicial, seguridad5);
+    inicial->insertarSoftware(inicial, seguridad6);
+}
+
+void poblarSocial(NodoSoftware *inicial){
+    Software *social1 = new Social("FACEBOOK", "ZUCKERBERG", "SOCIAL", 2323);
+    Software *social2 = new Social("X", "MUSK", "SOCIAL", 0);
+
+    inicial->insertarSoftware(inicial, social1);
+    inicial->insertarSoftware(inicial, social2);
+}
