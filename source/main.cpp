@@ -10,29 +10,23 @@
 #include "Software/Produccion.h"
 #include "Software/Seguridad.h"
 #include "Software/Social.h"
-#include "NodoUsuario.h"
-#include "NodoSoftware.h"
-
+#include "ListaUsuario.h"
+#include "ListaSoftware.h"
 using namespace std;
 
-void poblarUsuarios(NodoUsuario *);
-void poblarSoftware(NodoSoftware *);
-void poblarJuegos(NodoSoftware *);
-void poblarOfimatica(NodoSoftware *);
-void poblarProduccion(NodoSoftware *);
-void poblarNavegadores(NodoSoftware *);
-void poblarSeguridad(NodoSoftware *);
-void poblarSocial(NodoSoftware *);
+ListaUsuario poblarUsuarios();
+ListaSoftware poblarSoftware();
+ListaSoftware poblarJuegos(ListaSoftware);
+void poblarOfimatica(ListaSoftware);
+void poblarProduccion(ListaSoftware);
+void poblarNavegadores(ListaSoftware);
+void poblarSeguridad(ListaSoftware);
+void poblarSocial(ListaSoftware);
 
 int main(){
 
-    NodoUsuario* raiz = new NodoUsuario();
-    NodoSoftware* inicial = new NodoSoftware();
-
-    poblarSoftware(inicial);
-    poblarUsuarios(raiz);
-
-    raiz->recorrerNodo(raiz);
+    ListaUsuario listaUsuarios = poblarUsuarios();
+    ListaSoftware listaSoftwares = poblarSoftware();
   
     /*Usuario *user = raiz -> getUsuarioNombre(raiz, "Felipe");
     Software *soft = inicial -> getSoftwareClasificacion(inicial, "FACEBOOK");
@@ -42,10 +36,36 @@ int main(){
         Usuario *user2 = static_cast <Social*>(soft) -> getAmigoNombre(user->getUser());
         cout<<user2->getUser()<<endl;
     }*/
-  
+
+    
+    /*Usuario *user = listaUsuarios.obtenerUsuario("Juan");
+
+    if(user != nullptr){
+        cout <<"Se encontro al usuario "<< user -> getUser()<<endl;
+    }else{
+        cout<<"Usuario no encontrado"<<endl;
+    }
+
+    listaUsuarios.imprimir();
+
+    listaUsuarios.eliminar(user->getUser());
+
+    listaUsuarios.imprimir();*/
+
+    listaSoftwares.imprimir();
+    Software* soft = listaSoftwares.obtenerSoftware("WORD");
+    
+    if(soft->getClasificacion() == "OFIMATICA"){
+        cout<<static_cast<Ofimatica*> (soft) -> getCantArchivos()<<endl;
+    }
+
+
+
 }
 
-void poblarUsuarios(NodoUsuario *raiz){
+ListaUsuario poblarUsuarios(){
+    ListaUsuario lista;
+
     Usuario *admin1 = new Admin("Juan", "juan123", 25, "correo@correo.cl", true);
     Usuario *nino1 = new Nino("Jose", "jose123", 12);
     Usuario *nino2 = new Nino("Miguel", "miguel123", 13);
@@ -62,33 +82,38 @@ void poblarUsuarios(NodoUsuario *raiz){
     Usuario *usuario9 = new UsuarioNormal("Arturo", "arturo123", 25, "arturo@correo.cl");
     Usuario *usuario10 = new UsuarioNormal("Armando", "armando123", 25, "armando@correo.cl");
 
-    raiz->insertarUsuario(raiz, admin1);
-    raiz->insertarUsuario(raiz, nino1);
-    raiz->insertarUsuario(raiz, nino2);
-    raiz->insertarUsuario(raiz, nino3);
-    raiz->insertarUsuario(raiz, nino4);
-    raiz->insertarUsuario(raiz, usuario1);
-    raiz->insertarUsuario(raiz, usuario2);
-    raiz->insertarUsuario(raiz, usuario3);
-    raiz->insertarUsuario(raiz, usuario4);
-    raiz->insertarUsuario(raiz, usuario5);
-    raiz->insertarUsuario(raiz, usuario6);
-    raiz->insertarUsuario(raiz, usuario7);
-    raiz->insertarUsuario(raiz, usuario8);
-    raiz->insertarUsuario(raiz, usuario9);
-    raiz->insertarUsuario(raiz, usuario10);
+    lista.agregar(admin1);
+    lista.agregar(nino1);
+    lista.agregar(nino2);
+    lista.agregar(nino3);
+    lista.agregar(nino4);
+    lista.agregar(usuario1);
+    lista.agregar(usuario2);
+    lista.agregar(usuario3);
+    lista.agregar(usuario4);
+    lista.agregar(usuario5);
+    lista.agregar(usuario6);
+    lista.agregar(usuario7);
+    lista.agregar(usuario8);
+    lista.agregar(usuario9);
+    lista.agregar(usuario10);
+
+    return lista;
+    
 };
 
-void poblarSoftware(NodoSoftware *inicial){
-    poblarJuegos(inicial);
-    poblarProduccion(inicial);
-    poblarNavegadores(inicial);
-    poblarOfimatica(inicial);
-    poblarSeguridad(inicial);
-    poblarSocial(inicial);
+ListaSoftware poblarSoftware(){
+    ListaSoftware lista;    
+    lista = poblarJuegos(lista);
+    poblarProduccion(lista);
+    poblarNavegadores(lista);
+    poblarOfimatica(lista);
+    poblarSeguridad(lista);
+    poblarSocial(lista);
+    return lista;
 }
 
-void poblarJuegos(NodoSoftware *inicial){
+ListaSoftware poblarJuegos(ListaSoftware lista){
     Software *juego1 = new Juego("COD", "JUAN", "JUEGO", 22000, "SHOOTER");
     Software *juego2 = new Juego("CSGO", "JUAN", "JUEGO", 22000, "SHOOTER");
     Software *juego3 = new Juego("KF", "JUAN", "JUEGO", 22000, "GORE");
@@ -110,61 +135,64 @@ void poblarJuegos(NodoSoftware *inicial){
     Software *juego19 = new Juego("VR", "JUAN", "JUEGO", 200, "SIMULACION");
     Software *juego20 = new Juego("FARM SIMULATOR", "JUAN", "JUEGO", 2000, "SIMULACION");
 
-    inicial->insertarSoftware(inicial, juego1);
-    inicial->insertarSoftware(inicial, juego2);
-    inicial->insertarSoftware(inicial, juego3);
-    inicial->insertarSoftware(inicial, juego4);
-    inicial->insertarSoftware(inicial, juego5);
-    inicial->insertarSoftware(inicial, juego6);
-    inicial->insertarSoftware(inicial, juego7);
-    inicial->insertarSoftware(inicial, juego8);
-    inicial->insertarSoftware(inicial, juego9);
-    inicial->insertarSoftware(inicial, juego10);
-    inicial->insertarSoftware(inicial, juego11);
-    inicial->insertarSoftware(inicial, juego12);
-    inicial->insertarSoftware(inicial, juego13);
-    inicial->insertarSoftware(inicial, juego14);
-    inicial->insertarSoftware(inicial, juego15);
-    inicial->insertarSoftware(inicial, juego16);
-    inicial->insertarSoftware(inicial, juego17);
-    inicial->insertarSoftware(inicial, juego18);
-    inicial->insertarSoftware(inicial, juego19);
-    inicial->insertarSoftware(inicial, juego20);
+   lista.agregar(juego1);
+   lista.agregar(juego2);
+   lista.agregar(juego3);
+   lista.agregar(juego4);
+   lista.agregar(juego5);
+   lista.agregar(juego6);
+   lista.agregar(juego7);
+   lista.agregar(juego8);
+   lista.agregar(juego9);
+   lista.agregar(juego10);
+   lista.agregar(juego11);
+   lista.agregar(juego12);
+   lista.agregar(juego13);
+   lista.agregar(juego14);
+   lista.agregar(juego15);
+   lista.agregar(juego16);
+   lista.agregar(juego17);
+   lista.agregar(juego18);
+   lista.agregar(juego19);
+   lista.agregar(juego20);
+
+   return lista;
+
 };
 
-void poblarProduccion(NodoSoftware *inicial){
+void poblarProduccion(ListaSoftware lista){
     Software *produccion1 = new Produccion("OBS", "JORGE", "PRODUCCION", 22552.44, "STREAMING");
     Software *produccion2 = new Produccion("GALERIA", "MIGUEL", "PRODUCCION", 22112.44, "FOTOS");
     Software *produccion3 = new Produccion("CINE", "MATIAS", "PRODUCCION", 22232.44, "VIDEO");
     Software *produccion4 = new Produccion("REPRODUCTOR", "PEDRO", "PRODUCCION", 222, "MUSICA");
 
-    inicial->insertarSoftware(inicial, produccion1);
-    inicial->insertarSoftware(inicial, produccion2);
-    inicial->insertarSoftware(inicial, produccion3);
-    inicial->insertarSoftware(inicial, produccion4);
+    lista.agregar(produccion1);
+    lista.agregar(produccion2);
+    lista.agregar(produccion3);
+    lista.agregar(produccion4);
 }
 
-void poblarNavegadores(NodoSoftware *inicial){
+void poblarNavegadores(ListaSoftware lista){
     Software *navegador1 = new Navegador("CHROME", "FELIPE", "NAVEGADOR", 232323);
     Software *navegador2 = new Navegador("MOZILLA", "MATIAS", "NAVEGADOR", 4323);
 
-    inicial->insertarSoftware(inicial, navegador1);
-    inicial->insertarSoftware(inicial, navegador2);
+    lista.agregar(navegador1);
+    lista.agregar(navegador2);
 }
 
-void poblarOfimatica(NodoSoftware *inicial){
+void poblarOfimatica(ListaSoftware lista){
     Software *ofimatica1 = new Ofimatica("WORD", "AARON", "OFIMATICA", 44444);
     Software *ofimatica2 = new Ofimatica("PPT", "PAULA", "OFIMATICA", 88888);
     Software *ofimatica3 = new Ofimatica("EXCEL", "MARIA", "OFIMATICA", 777);
     Software *ofimatica4 = new Ofimatica("ONENOTE", "CARLOS", "OFIMATICA", 4545);
 
-    inicial -> insertarSoftware (inicial, ofimatica1);
-    inicial -> insertarSoftware (inicial, ofimatica2);
-    inicial -> insertarSoftware (inicial, ofimatica3);
-    inicial -> insertarSoftware (inicial, ofimatica4);
+    lista.agregar(ofimatica1);
+    lista.agregar(ofimatica2);
+    lista.agregar(ofimatica3);
+    lista.agregar(ofimatica4);
 }
 
-void poblarSeguridad(NodoSoftware *inicial){
+void poblarSeguridad(ListaSoftware lista){
     Software *seguridad1 = new Seguridad("SECURE", "JOSE", "SEGURIDAD", 323232, "RANSOMWARE");
     Software *seguridad2 = new Seguridad("SEGURIDAD", "JOSE", "SEGURIDAD", 323232, "SPYWARE");
     Software *seguridad3 = new Seguridad("ANTIVIRUS", "JOSE", "SEGURIDAD", 323232, "BOTNETS");
@@ -172,18 +200,18 @@ void poblarSeguridad(NodoSoftware *inicial){
     Software *seguridad5 = new Seguridad("SALVATION", "JOSE", "SEGURIDAD", 323232, "GUSANOS");
     Software *seguridad6 = new Seguridad("SECURITY", "JOSE", "SEGURIDAD", 323232, "TROYANOS");
 
-    inicial->insertarSoftware(inicial, seguridad1);
-    inicial->insertarSoftware(inicial, seguridad2);
-    inicial->insertarSoftware(inicial, seguridad3);
-    inicial->insertarSoftware(inicial, seguridad4);
-    inicial->insertarSoftware(inicial, seguridad5);
-    inicial->insertarSoftware(inicial, seguridad6);
+    lista.agregar(seguridad1);
+    lista.agregar(seguridad2);
+    lista.agregar(seguridad3);
+    lista.agregar(seguridad4);
+    lista.agregar(seguridad5);
+    lista.agregar(seguridad6);
 }
 
-void poblarSocial(NodoSoftware *inicial){
+void poblarSocial(ListaSoftware lista){
     Software *social1 = new Social("FACEBOOK", "ZUCKERBERG", "SOCIAL", 2323);
     Software *social2 = new Social("X", "MUSK", "SOCIAL", 0);
 
-    inicial->insertarSoftware(inicial, social1);
-    inicial->insertarSoftware(inicial, social2);
+    lista.agregar(social1);
+    lista.agregar(social2);
 }

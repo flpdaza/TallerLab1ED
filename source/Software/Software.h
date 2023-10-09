@@ -1,19 +1,16 @@
 #pragma once
 #include <iostream>
 #include "../Usuario/Usuario.h"
-#include "../NodoUsuario.h"
 using namespace std;
 
 class Software{
     private:
     string nombre, developer, clasificacion;
     double precio;
-    NodoUsuario *listaUsuarios;
     
     public:
     Software(string, string, string, double);
     ~Software();
-    NodoUsuario *getListaUsuarios();
     virtual string getNombre();
     virtual string getDeveloper();
     virtual string getClasificacion();
@@ -62,9 +59,7 @@ string Software::getClasificacion(){
     return this -> clasificacion;
 }
 
-NodoUsuario* Software::getListaUsuarios(){
-    return this -> listaUsuarios;
-}
+
 
 double Software::getPrecio(){
     return this -> precio;
