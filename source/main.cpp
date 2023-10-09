@@ -12,6 +12,7 @@
 #include "Software/Social.h"
 #include "ListaUsuario.h"
 #include "ListaSoftware.h"
+
 using namespace std;
 
 ListaUsuario poblarUsuarios();
@@ -22,45 +23,96 @@ void poblarProduccion(ListaSoftware);
 void poblarNavegadores(ListaSoftware);
 void poblarSeguridad(ListaSoftware);
 void poblarSocial(ListaSoftware);
+void iniciarSesion(ListaUsuario, ListaSoftware);
+void menuAdmin(Usuario *, ListaSoftware, ListaUsuario);
 
 int main(){
 
     ListaUsuario listaUsuarios = poblarUsuarios();
     ListaSoftware listaSoftwares = poblarSoftware();
   
-    /*Usuario *user = raiz -> getUsuarioNombre(raiz, "Felipe");
-    Software *soft = inicial -> getSoftwareClasificacion(inicial, "FACEBOOK");
+    iniciarSesion(listaUsuarios, listaSoftwares);
 
-    if(soft->getClasificacion() == "SOCIAL"){
-        static_cast <Social*>(soft) -> setListaAmigos(user);
-        Usuario *user2 = static_cast <Social*>(soft) -> getAmigoNombre(user->getUser());
-        cout<<user2->getUser()<<endl;
-    }*/
+
+
+}
+
+
+
+void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
+    string nombre, contrasena;
+    string respuesta = "";
+    
+    while(respuesta != "s" && respuesta != "S"){
+        cout<<"Ingrese nombre: ";
+        cin>>nombre;
+        cout<<"Ingese Contrasena: ";
+        cin>>contrasena;
+
+        Usuario *usuario = ListaUsuarios.obtenerUsuario(nombre);
+
+        if(usuario){
+            if(usuario->getContrasena() == contrasena){
+                if(usuario->getLog()){
+                    menuAdmin(usuario, listaSoftwares, ListaUsuarios);
+                }else if(usuario->getEdad()>18){
+                    //menuNormal();
+                }else{
+                    //menuNino();
+                }
+                
+            }else{
+                cout<<"Contrasena incorrecta intente de nuevo (Ingrese 'S' para salir): ";
+                cin>>respuesta;
+            }
+        }else{
+            cout<<"Usuario no encontrado\n"<<endl;
+            cout<<"Para continuar cualquier letra (Ingrese 'S' para salir): ";
+            cin>>respuesta;
+                    
+        }
+
+        cout<<"Desea iniciar sesion con otro usuario? (Ingrese 'S' para salir): ";
+        cin>>respuesta;
+    }
+    
 
     
-    /*Usuario *user = listaUsuarios.obtenerUsuario("Juan");
 
-    if(user != nullptr){
-        cout <<"Se encontro al usuario "<< user -> getUser()<<endl;
-    }else{
-        cout<<"Usuario no encontrado"<<endl;
+};
+
+void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
+    int opcion = 0;
+    cout<<"**** Menu Admin ****"<<endl;
+    cout<<"1.- Mostrar todos los Software"<<endl;
+    cout<<"2.- Mostrar todos los usuarios"<<endl;
+    cout<<"3.- Softwares de Seguridad"<<endl;
+    cout<<"4.- Salir"<<endl;
+    cout<<"Ingrese opcion: ";
+    cin>> opcion;
+    while(opcion != 4){
+        switch (opcion)
+        {
+        case 1:
+            listaSoftwares.imprimir();
+            break;
+        case 2:
+            listaUsuarios.imprimir();
+            break;
+        default:
+            break;
+        }
+       
+       
+        cout<<"\n**** Menu Admin ****"<<endl;
+        cout<<"1.- Mostrar Software por categoria"<<endl;
+        cout<<"2.- Mostrar usuarios por categoria"<<endl;
+        cout<<"3.- Softwares de Seguridad"<<endl;
+        cout<<"4.- Salir"<<endl;
+        cout<<"Ingrese opcion: ";
+        cin>> opcion;
     }
-
-    listaUsuarios.imprimir();
-
-    listaUsuarios.eliminar(user->getUser());
-
-    listaUsuarios.imprimir();*/
-
-    listaSoftwares.imprimir();
-    Software* soft = listaSoftwares.obtenerSoftware("WORD");
     
-    if(soft->getClasificacion() == "OFIMATICA"){
-        cout<<static_cast<Ofimatica*> (soft) -> getCantArchivos()<<endl;
-    }
-
-
-
 }
 
 ListaUsuario poblarUsuarios(){

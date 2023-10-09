@@ -21,6 +21,7 @@ class Usuario{
         int getEdad();
         virtual string getCorreo();
         virtual bool getLog();
+        void getInfo();
 };
 Usuario::Usuario(string user, string contrasena, int edad){
     this -> user = user;
@@ -29,6 +30,11 @@ Usuario::Usuario(string user, string contrasena, int edad){
 };
 
 Usuario::~Usuario(){};
+
+void Usuario::getInfo(){
+    cout<<"\nNombre: "<<this -> user << endl;
+    cout<<"Edad: "<<this -> edad << endl;
+}
 
 void Usuario::setUser(string user){
     this -> user = user;

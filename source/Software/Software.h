@@ -19,6 +19,7 @@ class Software{
     void setDeveloper(string);
     void setClasificacion(string);
     void setPrecio(double);
+    void getInfo();
 };
 
 Software::Software(string nombre, string developer, string clasificacion, double precio){
@@ -30,6 +31,14 @@ Software::Software(string nombre, string developer, string clasificacion, double
 };
 
 Software::~Software(){};
+
+void Software::getInfo(){
+
+    cout<<"\nNombre: "<< this -> nombre <<endl;
+    cout<<"Developer: "<< this -> developer <<endl;
+    cout<<"Clasificacion: "<< this -> clasificacion <<endl;
+    cout<<"Precio: "<< this -> precio <<endl;
+}
 
 void Software::setNombre(string nombre){
     this -> nombre = nombre;

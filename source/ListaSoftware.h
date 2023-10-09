@@ -42,9 +42,8 @@ Software *ListaSoftware::obtenerSoftware(string nombre){
 }
 
 void ListaSoftware::imprimir(){
-    int admin = 0, adulto = 0, ninio = 0;
     for(NodoSoftware *p = cabeza; p != nullptr; p = p->siguiente){
-        cout<<p->software->getNombre()<<endl;   
+        p->software->getInfo();   
 
     }
 

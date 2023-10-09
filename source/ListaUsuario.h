@@ -69,17 +69,7 @@ Usuario *ListaUsuario::obtenerUsuario(string nombre){
 }
 
 void ListaUsuario::imprimir(){
-    int admin = 0, adulto = 0, ninio = 0;
-    for(NodoUsuario *p = cabeza; p != nullptr; p = p->siguiente){
-        if(p->usuario->getLog()){
-            admin++;
-        }else if(!p->usuario->getLog() && p->usuario->getEdad() < 18){
-            ninio++;
-        }else{
-            adulto++;
-        }
-
+    for(NodoUsuario *p = cabeza; p!=nullptr; p = p->siguiente){
+        p->usuario->getInfo();
     }
-
-    cout<<"Hay "<< admin <<" admin(s), "<< adulto<< " adulto(s), y "<< ninio << " ninio(s)"<<endl;
 }
