@@ -11,7 +11,10 @@ class ListaSoftware{
     ListaSoftware();
     void agregar(Software *);
     void imprimir();
+    void imprimirSeguridad();
+    void imprimirJuegos();
     Software *obtenerSoftware(string);
+    Software *obtenerSoftwareSocial(string);
 };
 
 ListaSoftware::ListaSoftware(){this -> cabeza = nullptr;}
@@ -41,11 +44,37 @@ Software *ListaSoftware::obtenerSoftware(string nombre){
     return nullptr;
 }
 
+Software *ListaSoftware::obtenerSoftwareSocial(string nombre){
+    for(NodoSoftware *p = cabeza; p != nullptr; p = p->siguiente){
+        if(p->software->getNombre() == nombre){
+            return p->software;
+        }
+    }
+
+    cout<<"El software no se encontro"<<endl;
+    return nullptr;
+}
 void ListaSoftware::imprimir(){
     for(NodoSoftware *p = cabeza; p != nullptr; p = p->siguiente){
         p->software->getInfo();   
 
-    }
+    }    
+}
 
-    
+void ListaSoftware::imprimirSeguridad(){
+    for(NodoSoftware *p = cabeza; p != nullptr; p = p->siguiente){
+        if(p->software->getClasificacion() == "SEGURIDAD")   {
+            p->software->getInfo();
+        }
+
+    }    
+}
+void ListaSoftware::imprimirJuegos(){
+    for(NodoSoftware *p = cabeza; p != nullptr; p = p->siguiente){
+        if(p->software->getClasificacion() == "JUEGO")   {
+            p->software->getInfo();
+            cout<<"Genero: "<<static_cast<Juego*>(p->software)->getGenero()<<endl;
+        }
+
+    }    
 }

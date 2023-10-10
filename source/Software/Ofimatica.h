@@ -13,7 +13,7 @@ class Ofimatica:public Software{
     Ofimatica(string, string, string, double);
     ~Ofimatica();
     int getCantArchivos();
-    void aniadirArchivo();
+    void aniadirArchivo(int);
     void eliminarArchivos(int);
 };
 
@@ -27,10 +27,19 @@ int Ofimatica::getCantArchivos(){
     return this -> cantArchivos;
 }
 
-void Ofimatica::aniadirArchivo(){
+void Ofimatica::aniadirArchivo(int archivos){
     string respuesta;
-    if(cantArchivos<=10){
-        cantArchivos++;
+    if(cantArchivos<10 ){
+        if(cantArchivos + archivos <= 10){
+            cantArchivos += archivos;
+            cout<<archivos<<" Archivos agregados"<<endl;
+            return;
+        }else{
+            cout<<"Se pasa del limite de 10 archivos"<<endl;
+            cout<<"Solo puede agregar "<<10-cantArchivos<<" archivos mas"<<endl;
+            return;
+        }
+        
     }else{
         cout<<"Usted alcanzo el tope de archivos"<<endl;
         cout<<"Desea eliminar archivos? (s/n): "<<endl;
@@ -50,5 +59,12 @@ void Ofimatica::aniadirArchivo(){
 };
 
 void Ofimatica::eliminarArchivos (int n){
-    this -> cantArchivos -= n;
+    if(cantArchivos - n < 0){
+        cout<<"No puede eliminar mas archivos de los que posee, ustede posee "<<cantArchivos<<" archivos"<<endl;
+    }else{
+        this -> cantArchivos -= n;
+        cout<<n<<" Archivos eliminados"<<endl;
+        cout<<"Ahora cuenta con"<<cantArchivos<<" archivos"<<endl;
+    }
+    
 }

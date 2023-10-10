@@ -23,8 +23,13 @@ void poblarProduccion(ListaSoftware);
 void poblarNavegadores(ListaSoftware);
 void poblarSeguridad(ListaSoftware);
 void poblarSocial(ListaSoftware);
+void agregarAmigo(ListaSoftware, ListaUsuario);
+void agregarAmigoNinio(ListaSoftware, ListaUsuario);
+void agregarArchivos(ListaSoftware);
 void iniciarSesion(ListaUsuario, ListaSoftware);
 void menuAdmin(Usuario *, ListaSoftware, ListaUsuario);
+void menuNormal(Usuario *, ListaSoftware, ListaUsuario);
+void menuNinio(Usuario *, ListaSoftware, ListaUsuario);
 
 int main(){
 
@@ -44,7 +49,7 @@ void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
     string respuesta = "";
     
     while(respuesta != "s" && respuesta != "S"){
-        cout<<"Ingrese nombre: ";
+        cout<<"\nIngrese nombre: ";
         cin>>nombre;
         cout<<"Ingese Contrasena: ";
         cin>>contrasena;
@@ -56,9 +61,9 @@ void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
                 if(usuario->getLog()){
                     menuAdmin(usuario, listaSoftwares, ListaUsuarios);
                 }else if(usuario->getEdad()>18){
-                    //menuNormal();
+                    menuNormal(usuario, listaSoftwares, ListaUsuarios);
                 }else{
-                    //menuNino();
+                    menuNinio(usuario, listaSoftwares, ListaUsuarios);
                 }
                 
             }else{
@@ -67,19 +72,197 @@ void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
             }
         }else{
             cout<<"Usuario no encontrado\n"<<endl;
-            cout<<"Para continuar cualquier letra (Ingrese 'S' para salir): ";
+            cout<<"Para continuar ingrese cualquier letra (Ingrese 'S' para salir): ";
             cin>>respuesta;
                     
         }
-
-        cout<<"Desea iniciar sesion con otro usuario? (Ingrese 'S' para salir): ";
-        cin>>respuesta;
-    }
+        if(respuesta != "s" && respuesta != "S"){
+            cout<<"\nIniciando otra vez"<<endl;
+        }else{
+            cout<<"Desea iniciar sesion con otro usuario? (Ingrese 'S' para salir): ";
+            cin>>respuesta;
+        }
+    }   
     
 
     
 
 };
+
+void menuNinio(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
+    int opcion;
+    cout<<"\n**** Menu Ninio ****"<<endl;
+    cout<<"1.- Agregar amigo"<<endl;
+    cout<<"2.- Agregar archivos en Software (Ofimatica)"<<endl;
+    cout<<"3.- Ver Juegos"<<endl;
+    cout<<"4.- Salir"<<endl;
+    cout<<"Ingrese opcion: ";
+    cin>>opcion;
+    while(opcion != 4){
+
+        switch (opcion)
+        {
+        case 1:
+            agregarAmigoNinio(listaSoftwares, listaUsuarios);
+            break;
+        case 2:
+            agregarArchivos(listaSoftwares);
+        case 3:
+            listaSoftwares.imprimirJuegos();
+        default:
+            break;
+        }
+
+        cout<<"\n**** Menu Ninio ****"<<endl;
+        cout<<"1.- Agregar amigo"<<endl;
+        cout<<"2.- Agregar archivos en Software (Ofimatica)"<<endl;
+        cout<<"3.- Ver Juegos"<<endl;
+        cout<<"4.- Salir"<<endl;
+        cout<<"Ingrese opcion: ";
+        cin>>opcion;
+    }
+};
+
+void menuNormal(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
+    int opcion = 0;
+    cout<<"\n**** Menu Normal ****"<<endl;
+    cout<<"1.- Mostrar todos los Software"<<endl;
+    cout<<"2.- Agregar amigo"<<endl;
+    cout<<"3.- Agregar archivos en Software (Ofimatica)"<<endl;
+    cout<<"4.- Salir"<<endl;
+    cout<<"Ingrese opcion: ";
+    cin>> opcion;
+    while(opcion != 4){
+        switch (opcion)
+        {
+        case 1:
+            listaSoftwares.imprimir();
+            break;
+        case 2:
+            agregarAmigo(listaSoftwares, listaUsuarios);
+            break;
+        case 3:
+            agregarArchivos(listaSoftwares);
+            break;            
+        default:
+            cout<<"\nSaliendo..."<<endl;
+            break;
+        }
+       
+       
+        cout<<"\n**** Menu Normal ****"<<endl;
+        cout<<"1.- Mostrar todos los Software"<<endl;
+        cout<<"2.- Agregar amigo"<<endl;
+        cout<<"3.- Agregar archivos en Software (Ofimatica)"<<endl;
+        cout<<"4.- Salir"<<endl;
+        cout<<"Ingrese opcion: ";
+        cin>> opcion;
+    }
+}
+
+void agregarArchivos(ListaSoftware listaSoftwares){
+    int programa;
+    int cantArchivos;
+    cout<<"Ingrese el numero del programa en el cual agregara archivos"<<endl;
+    cout<<"1.- WORD"<<endl;
+    cout<<"2.- PPT"<<endl;
+    cout<<"3.- EXCEL"<<endl;
+    cout<<"4.- ONENOTE"<<endl;
+    cout<<"Opcion: "<<endl;
+    cin>>programa;
+
+    if(programa == 1){
+        Software *ofi = listaSoftwares.obtenerSoftware("WORD");
+        cout<<"Cuantos archivos desea agregar: "<<endl;
+        cin>>cantArchivos;
+        static_cast<Ofimatica*>(ofi)->aniadirArchivo(cantArchivos);
+    }else if(programa == 2){
+        Software *ofi2 = listaSoftwares.obtenerSoftware("PPT");
+        cout<<"Cuantos archivos desea agregar: "<<endl;
+        cin>>cantArchivos;
+        static_cast<Ofimatica*>(ofi2)->aniadirArchivo(cantArchivos);
+        
+    }else if(programa == 3){
+        Software *ofi3 = listaSoftwares.obtenerSoftware("EXCEL");
+            cout<<"Cuantos archivos desea agregar: "<<endl;
+            cin>>cantArchivos;
+            static_cast<Ofimatica*>(ofi3)->aniadirArchivo(cantArchivos);
+    }else if(programa == 4){
+        Software *ofi4 = listaSoftwares.obtenerSoftware("ONENOTE");
+            cout<<"Cuantos archivos desea agregar: "<<endl;
+            cin>>cantArchivos;
+            static_cast<Ofimatica*>(ofi4)->aniadirArchivo(cantArchivos);
+            
+    }else{
+        cout<<"Opcion Incorrecta"<<endl;
+    } 
+
+
+}
+
+void agregarAmigoNinio(ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
+    string redSocial = "";
+    string nombreAmigo = "";
+    cout<<"Ingrese nombre de red social (FACEBOOK O X): "<<endl;
+    cin>>redSocial;
+    if(redSocial == "FACEBOOK"){
+        Software *facebook = static_cast<Social*> (listaSoftwares.obtenerSoftwareSocial(redSocial));
+        cout<<"Ingrese nombre de la persona a agregar: "<<endl;
+        cin>>nombreAmigo;
+        Usuario *user = listaUsuarios.obtenerUsuario(nombreAmigo);
+        if(user->getEdad() < 18){
+            static_cast<Social*>(facebook)->setListaAmigos(user);
+        }else if(user -> getEdad()>=18){
+            cout<<"No puedes agregar mayores de edad"<<endl;
+        }else{
+            cout<<"No se encontro el usuario"<<endl;
+        }
+    }else if(redSocial == "X"){
+        Software *x = listaSoftwares.obtenerSoftwareSocial(redSocial);
+        cout<<"Ingrese nombre de la persona a agregar: "<<endl;
+        cin>>nombreAmigo;
+        Usuario *user = listaUsuarios.obtenerUsuario(nombreAmigo);
+        if(user->getEdad() < 18){
+            static_cast<Social*>(x)->setListaAmigos(user);
+        }else if(user -> getEdad()>=18){
+            cout<<"No puedes agregar mayores de edad"<<endl;
+        }else{
+            cout<<"No se encontro el usuario"<<endl;
+        }
+    }else{
+        cout<<"No se encontro la red social"<<endl;
+    }
+}
+
+void agregarAmigo(ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
+    string redSocial = "";
+    string nombreAmigo = "";
+    cout<<"Ingrese nombre de red social (FACEBOOK O X): "<<endl;
+    cin>>redSocial;
+    if(redSocial == "FACEBOOK"){
+        Software *facebook = static_cast<Social*> (listaSoftwares.obtenerSoftwareSocial(redSocial));
+        cout<<"Ingrese nombre de la persona a agregar: "<<endl;
+        cin>>nombreAmigo;
+        Usuario *user = listaUsuarios.obtenerUsuario(nombreAmigo);
+        if(user){
+            static_cast<Social*>(facebook)->setListaAmigos(user);
+            }else{
+                cout<<"No se encontro el usuario"<<endl;
+            }
+        }else if(redSocial == "X"){
+            Software *x = listaSoftwares.obtenerSoftwareSocial(redSocial);
+            cout<<"Ingrese nombre de la persona a agregar: "<<endl;
+            cin>>nombreAmigo;
+            Usuario *user = listaUsuarios.obtenerUsuario(nombreAmigo);
+            if(user){
+                static_cast<Social*>(x)->setListaAmigos(user);
+            }else{
+                cout<<"No se encontro el usuario"<<endl;
+            }
+        }else{
+            cout<<"No se encontro la red social"<<endl;
+        }
+}
 
 void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
     int opcion = 0;
@@ -99,7 +282,11 @@ void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario list
         case 2:
             listaUsuarios.imprimir();
             break;
+        case 3:
+            listaSoftwares.imprimirSeguridad();
+            break;
         default:
+            cout<<"\nSaliendo..."<<endl;
             break;
         }
        
