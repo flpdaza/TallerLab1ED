@@ -26,6 +26,7 @@ void poblarSocial(ListaSoftware);
 void agregarAmigo(ListaSoftware, ListaUsuario);
 void agregarAmigoNinio(ListaSoftware, ListaUsuario);
 void agregarArchivos(ListaSoftware);
+void eliminarArchivos(ListaSoftware);
 void iniciarSesion(ListaUsuario, ListaSoftware);
 void menuAdmin(Usuario *, ListaSoftware, ListaUsuario);
 void menuNormal(Usuario *, ListaSoftware, ListaUsuario);
@@ -47,6 +48,7 @@ int main(){
 void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
     string nombre, contrasena;
     string respuesta = "";
+    bool sesion = false;
     
     while(respuesta != "s" && respuesta != "S"){
         cout<<"\nIngrese nombre: ";
@@ -57,13 +59,17 @@ void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
         Usuario *usuario = ListaUsuarios.obtenerUsuario(nombre);
 
         if(usuario){
+            sesion = true;
             if(usuario->getContrasena() == contrasena){
                 if(usuario->getLog()){
                     menuAdmin(usuario, listaSoftwares, ListaUsuarios);
+                    sesion = false;
                 }else if(usuario->getEdad()>18){
                     menuNormal(usuario, listaSoftwares, ListaUsuarios);
+                    sesion = false;
                 }else{
                     menuNinio(usuario, listaSoftwares, ListaUsuarios);
+                    sesion = false;
                 }
                 
             }else{
@@ -76,9 +82,7 @@ void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
             cin>>respuesta;
                     
         }
-        if(respuesta != "s" && respuesta != "S"){
-            cout<<"\nIniciando otra vez"<<endl;
-        }else{
+        if(!sesion){
             cout<<"Desea iniciar sesion con otro usuario? (Ingrese 'S' para salir): ";
             cin>>respuesta;
         }
@@ -88,6 +92,55 @@ void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
     
 
 };
+//menu que se ejecuta al iniciar como admin
+void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
+    int opcion = 0;
+    string software;
+    cout<<"\n**** Menu Admin ****"<<endl;
+    cout<<"1.- Mostrar todos los Software"<<endl;
+    cout<<"2.- Mostrar todos los usuarios"<<endl;
+    cout<<"3.- Softwares de Seguridad"<<endl;
+    cout<<"4.- Eliminar Software"<<endl;
+    cout<<"5.- Salir"<<endl;
+    cout<<"Ingrese opcion: ";
+    cin>> opcion;
+    while(opcion != 5){
+        switch (opcion)
+        {
+        case 1:
+            listaSoftwares.imprimir();
+            break;
+        case 2:
+            listaUsuarios.imprimir();
+            break;
+        case 3:
+            listaSoftwares.imprimirSeguridad();
+            break;
+        case 4:
+            listaSoftwares.imprimir();
+            cout<<"\nIngrese nombre de software a eliminar: "<<endl;
+            cin>>software;
+            listaSoftwares.eliminarSoftware(software);
+            cout<<"\nEliminando software"<<endl;
+            cout<<""<<endl;
+            listaSoftwares.imprimir();
+            
+        default:
+            break;
+        }
+       
+       
+        cout<<"\n**** Menu Admin ****"<<endl;
+        cout<<"1.- Mostrar todos los Software"<<endl;
+        cout<<"2.- Mostrar todos los usuarios"<<endl;
+        cout<<"3.- Softwares de Seguridad"<<endl;
+        cout<<"4.- Eliminar Software"<<endl;
+        cout<<"5.- Salir"<<endl;
+        cout<<"Ingrese opcion: ";
+        cin>> opcion;
+    }
+    
+}
 //menu que se ejecuta al iniciar como ninio
 void menuNinio(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
     int opcion;
@@ -129,10 +182,11 @@ void menuNormal(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario lis
     cout<<"1.- Mostrar todos los Software"<<endl;
     cout<<"2.- Agregar amigo"<<endl;
     cout<<"3.- Agregar archivos en Software (Ofimatica)"<<endl;
-    cout<<"4.- Salir"<<endl;
+    cout<<"4.- Eliminar Archivos"<<endl;
+    cout<<"5.- Salir"<<endl;
     cout<<"Ingrese opcion: ";
     cin>> opcion;
-    while(opcion != 4){
+    while(opcion != 5){
         switch (opcion)
         {
         case 1:
@@ -144,8 +198,9 @@ void menuNormal(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario lis
         case 3:
             agregarArchivos(listaSoftwares);
             break;            
+        case 4:
+            eliminarArchivos(listaSoftwares);
         default:
-            cout<<"\nSaliendo..."<<endl;
             break;
         }
        
@@ -154,10 +209,51 @@ void menuNormal(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario lis
         cout<<"1.- Mostrar todos los Software"<<endl;
         cout<<"2.- Agregar amigo"<<endl;
         cout<<"3.- Agregar archivos en Software (Ofimatica)"<<endl;
-        cout<<"4.- Salir"<<endl;
+        cout<<"4.- Eliminar Archivos"<<endl;
+        cout<<"5.- Salir"<<endl;
         cout<<"Ingrese opcion: ";
         cin>> opcion;
     }
+}
+//funcion para eliminar archivos a ofimatica
+void eliminarArchivos(ListaSoftware listaSoftwares){
+    int programa;
+    int cantArchivos;
+    cout<<"Ingrese el numero del programa en el cual eliminará archivos"<<endl;
+    cout<<"1.- WORD"<<endl;
+    cout<<"2.- PPT"<<endl;
+    cout<<"3.- EXCEL"<<endl;
+    cout<<"4.- ONENOTE"<<endl;
+    cout<<"Opcion: "<<endl;
+    cin>>programa;
+
+    if(programa == 1){
+        Software *ofi = listaSoftwares.obtenerSoftware("WORD");
+        cout<<"Cuantos archivos desea eliminar: "<<endl;
+        cin>>cantArchivos;
+        static_cast<Ofimatica*>(ofi)->eliminarArchivos(cantArchivos);
+    }else if(programa == 2){
+        Software *ofi2 = listaSoftwares.obtenerSoftware("PPT");
+        cout<<"Cuantos archivos desea eliminar: "<<endl;
+        cin>>cantArchivos;
+        static_cast<Ofimatica*>(ofi2)->eliminarArchivos(cantArchivos);
+        
+    }else if(programa == 3){
+        Software *ofi3 = listaSoftwares.obtenerSoftware("EXCEL");
+        cout<<"Cuantos archivos desea eliminar: "<<endl;
+        cin>>cantArchivos;
+        static_cast<Ofimatica*>(ofi3)->eliminarArchivos(cantArchivos);
+    }else if(programa == 4){
+        Software *ofi4 = listaSoftwares.obtenerSoftware("ONENOTE");
+        cout<<"Cuantos archivos desea eliminar: "<<endl;
+        cin>>cantArchivos;
+        static_cast<Ofimatica*>(ofi4)->eliminarArchivos(cantArchivos);
+            
+    }else{
+        cout<<"Opcion Incorrecta"<<endl;
+    } 
+
+
 }
 //funcion para agregar archivos a ofimatica
 void agregarArchivos(ListaSoftware listaSoftwares){
@@ -263,54 +359,7 @@ void agregarAmigo(ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
             cout<<"No se encontro la red social"<<endl;
         }
 }
-//menu que se ejecuta al iniciar como admin
-void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
-    int opcion = 0;
-    string software;
-    cout<<"\n**** Menu Admin ****"<<endl;
-    cout<<"1.- Mostrar todos los Software"<<endl;
-    cout<<"2.- Mostrar todos los usuarios"<<endl;
-    cout<<"3.- Softwares de Seguridad"<<endl;
-    cout<<"4.- Eliminar Software"<<endl;
-    cout<<"5.- Salir"<<endl;
-    cout<<"Ingrese opcion: ";
-    cin>> opcion;
-    while(opcion != 5){
-        switch (opcion)
-        {
-        case 1:
-            listaSoftwares.imprimir();
-            break;
-        case 2:
-            listaUsuarios.imprimir();
-            break;
-        case 3:
-            listaSoftwares.imprimirSeguridad();
-            break;
-        case 4:
-            listaSoftwares.imprimir();
-            cout<<"\nIngrese nombre de software a eliminar: "<<endl;
-            cin>>software;
-            listaSoftwares.eliminarSoftware(software);
-            cout<<"\nEliminando software"<<endl;
-            cout<<""<<endl;
-            listaSoftwares.imprimir();
-            
-        default:
-            break;
-        }
-       
-       
-        cout<<"\n**** Menu Admin ****"<<endl;
-        cout<<"1.- Mostrar Software por categoria"<<endl;
-        cout<<"2.- Mostrar usuarios por categoria"<<endl;
-        cout<<"3.- Softwares de Seguridad"<<endl;
-        cout<<"4.- Salir"<<endl;
-        cout<<"Ingrese opcion: ";
-        cin>> opcion;
-    }
-    
-}
+
 //funcion para poblar la base de datos de usuarios
 ListaUsuario poblarUsuarios(){
     ListaUsuario lista;
