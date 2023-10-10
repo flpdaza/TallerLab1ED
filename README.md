@@ -17,5 +17,6 @@ La creacion de usuarios Ninio se ve de la siguiente manera "Usuario *nino1 = new
 **CREACION DE SOFTWARE**
 
 La creacion de Software se ve de la siguiente manera "Software *juego1 = new Juego("COD", "JUAN", "JUEGO", 22000, "SHOOTER");"
-en los software todos los parametros van con mayusculas, y creados segun su clase especifica y para poder usar sus metodos especificos
+
+En los software todos los parametros van con mayusculas, y creados segun su clase especifica y para poder usar sus metodos especificos
 al obtener la clase se debe castear por la clase deseada
