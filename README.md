@@ -2,7 +2,7 @@
 
 **COMPILACION Y EJECUCION**
 
-Para poder compilar este proyecto debemos posicionar dentro de la carpeta source "cd source" en la terminal
+Para poder compilar este proyecto debemos posicionarnos dentro de la carpeta source utilizando "cd source" en la terminal,
 luego escribirmos la siguiente linea para compilarlo "g++ -o main main.cpp" una vez compilado le damos la instruccion
 de ejecutar escribiendo la siguiente linea "./main"
 
