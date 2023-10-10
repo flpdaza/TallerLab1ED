@@ -15,9 +15,35 @@ class ListaSoftware{
     void imprimirJuegos();
     Software *obtenerSoftware(string);
     Software *obtenerSoftwareSocial(string);
+    void eliminarSoftware(string);
 };
 
 ListaSoftware::ListaSoftware(){this -> cabeza = nullptr;}
+
+void ListaSoftware::eliminarSoftware(string nombre){
+    if(cabeza == nullptr){
+        cout<<"la lista está vacía"<<endl;
+        return;
+    }
+
+    if(cabeza->software->getNombre() == nombre){
+        NodoSoftware *temporal = cabeza;
+        cabeza = cabeza ->siguiente;
+        delete temporal;
+        return;
+    }
+
+    NodoSoftware* aux = cabeza;
+    while(aux -> siguiente != nullptr && aux -> siguiente -> software -> getNombre() != nombre){
+        aux = aux -> siguiente;
+    }
+
+    if(aux -> siguiente != nullptr){
+        NodoSoftware *temporal = aux -> siguiente;
+        aux -> siguiente = aux -> siguiente -> siguiente;
+        delete temporal;
+    }
+}
 
 void ListaSoftware::agregar(Software *s){
     NodoSoftware *nuevo = new NodoSoftware(s);

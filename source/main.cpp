@@ -43,7 +43,7 @@ int main(){
 }
 
 
-
+//funcion para iniciar sesion
 void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
     string nombre, contrasena;
     string respuesta = "";
@@ -88,7 +88,7 @@ void iniciarSesion(ListaUsuario ListaUsuarios, ListaSoftware listaSoftwares){
     
 
 };
-
+//menu que se ejecuta al iniciar como ninio
 void menuNinio(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
     int opcion;
     cout<<"\n**** Menu Ninio ****"<<endl;
@@ -122,7 +122,7 @@ void menuNinio(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario list
         cin>>opcion;
     }
 };
-
+//menu que se ejecuta al iniciar como usuario normal
 void menuNormal(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
     int opcion = 0;
     cout<<"\n**** Menu Normal ****"<<endl;
@@ -159,7 +159,7 @@ void menuNormal(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario lis
         cin>> opcion;
     }
 }
-
+//funcion para agregar archivos a ofimatica
 void agregarArchivos(ListaSoftware listaSoftwares){
     int programa;
     int cantArchivos;
@@ -199,7 +199,7 @@ void agregarArchivos(ListaSoftware listaSoftwares){
 
 
 }
-
+//funcion para que ninios solo puedan agregar ninios como amigos
 void agregarAmigoNinio(ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
     string redSocial = "";
     string nombreAmigo = "";
@@ -233,7 +233,7 @@ void agregarAmigoNinio(ListaSoftware listaSoftwares, ListaUsuario listaUsuarios)
         cout<<"No se encontro la red social"<<endl;
     }
 }
-
+//funcion agregar amigo para usuarios no ninios
 void agregarAmigo(ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
     string redSocial = "";
     string nombreAmigo = "";
@@ -263,17 +263,19 @@ void agregarAmigo(ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
             cout<<"No se encontro la red social"<<endl;
         }
 }
-
+//menu que se ejecuta al iniciar como admin
 void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario listaUsuarios){
     int opcion = 0;
-    cout<<"**** Menu Admin ****"<<endl;
+    string software;
+    cout<<"\n**** Menu Admin ****"<<endl;
     cout<<"1.- Mostrar todos los Software"<<endl;
     cout<<"2.- Mostrar todos los usuarios"<<endl;
     cout<<"3.- Softwares de Seguridad"<<endl;
-    cout<<"4.- Salir"<<endl;
+    cout<<"4.- Eliminar Software"<<endl;
+    cout<<"5.- Salir"<<endl;
     cout<<"Ingrese opcion: ";
     cin>> opcion;
-    while(opcion != 4){
+    while(opcion != 5){
         switch (opcion)
         {
         case 1:
@@ -285,8 +287,16 @@ void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario list
         case 3:
             listaSoftwares.imprimirSeguridad();
             break;
+        case 4:
+            listaSoftwares.imprimir();
+            cout<<"\nIngrese nombre de software a eliminar: "<<endl;
+            cin>>software;
+            listaSoftwares.eliminarSoftware(software);
+            cout<<"\nEliminando software"<<endl;
+            cout<<""<<endl;
+            listaSoftwares.imprimir();
+            
         default:
-            cout<<"\nSaliendo..."<<endl;
             break;
         }
        
@@ -301,7 +311,7 @@ void menuAdmin(Usuario *usuario, ListaSoftware listaSoftwares, ListaUsuario list
     }
     
 }
-
+//funcion para poblar la base de datos de usuarios
 ListaUsuario poblarUsuarios(){
     ListaUsuario lista;
 
@@ -340,7 +350,7 @@ ListaUsuario poblarUsuarios(){
     return lista;
     
 };
-
+//funcion que ejecuta otras funciones que ayudan a poblar la base de datos de software
 ListaSoftware poblarSoftware(){
     ListaSoftware lista;    
     lista = poblarJuegos(lista);
